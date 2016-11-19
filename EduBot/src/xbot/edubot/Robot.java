@@ -18,5 +18,6 @@ public class Robot extends BaseRobot {
 		super.initializeSystems();
 		this.injector.getInstance(DefaultCommandMap.class);
 		this.injector.getInstance(OperatorCommandMap.class);
+        // comment!
     }
 }
