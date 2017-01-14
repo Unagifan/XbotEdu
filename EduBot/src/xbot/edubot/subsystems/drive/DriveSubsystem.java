@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 
 @Singleton
 public class DriveSubsystem {
-
+	boolean toggle = false;
 	public MockDistanceSensor distanceSensor;
 	public MockHeadingSensor gyro;
 	
@@ -39,6 +39,39 @@ public class DriveSubsystem {
 		// You'll need to take these power values and assign them to all of the motors. As
 		// an example, here is some code that has the frontLeft motor to spin according to
 		// the value of leftPower:
+		if(toggle == true){
+			leftPower /= 2;
+			rightPower /= 2;
+		}
 		frontLeft.set(leftPower);
+		rearLeft.set(leftPower);
+		frontRight.set(rightPower);
+		rearRight.set(rightPower);
+	}
+	public void arcadeDrive(double leftValueY, double leftValueX){
+		double finalLeft = leftValueX + leftValueY;
+		double finalRight = -leftValueX + leftValueY;
+		if(finalLeft > 1){
+			finalLeft = 1;
+		}
+		else if(finalLeft < -1){
+			finalLeft = -1;
+		}
+		if(finalRight > 1) {
+			finalRight = 1;
+		}
+		else if (finalRight < -1){
+			finalRight = -1;
+		}
+		frontLeft.set((finalLeft));
+		rearLeft.set(finalLeft);
+		frontRight.set(finalRight);
+		rearRight.set(finalRight);
+		
+			
+	
+	}
+	public void togglePrecisionMode(){
+		toggle = !toggle;
 	}
 }
